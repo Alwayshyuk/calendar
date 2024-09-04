@@ -16,9 +16,9 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long sno;
 
-    @Column(unique = true)
+    @Column(name = "user")
     private Long user;
 
     @Column(name = "title", length = 100, nullable = false)
@@ -39,4 +39,5 @@ public class Schedule {
 
     @Column(name = "checked")
     private int checked;
+
 }
