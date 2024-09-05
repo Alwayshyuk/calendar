@@ -38,7 +38,7 @@ public class ScheduleApiController {
     @Parameters({
             @Parameter(name = "userNo", description = "유저 번호", example = "1"),
             @Parameter(name = "title", description = "일정 제목", example = "식사 약속"),
-            @Parameter(name = "content", description = "일정 내용", example = "오후 7시까지 회사 앞"),
+            @Parameter(name = "content", description = "일정 내용", example = "회사 앞"),
             @Parameter(name = "color", description = "약속 성격에 따른 색상", example = "1"),
             @Parameter(name = "scheduledate", description = "약속 일자", example = "2024-09-05"),
             @Parameter(name = "scheduletime", description = "약속 시간", example = "1800"),
@@ -66,7 +66,7 @@ public class ScheduleApiController {
             @Parameter(name = "sno", description = "변경 할 일정 번호", example = "1"),
             @Parameter(name = "userNo", description = "유저 번호", example = "1"),
             @Parameter(name = "title", description = "일정 제목", example = "식사 약속"),
-            @Parameter(name = "content", description = "일정 내용", example = "오후 7시까지 회사 앞"),
+            @Parameter(name = "content", description = "일정 내용", example = "회사 앞"),
             @Parameter(name = "color", description = "약속 성격에 따른 색상", example = "1"),
             @Parameter(name = "scheduledate", description = "약속 일자", example = "2024-09-05"),
             @Parameter(name = "scheduletime", description = "약속 시간", example = "1800"),
