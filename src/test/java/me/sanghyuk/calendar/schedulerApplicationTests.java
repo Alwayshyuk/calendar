@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.util.stream.IntStream;
 
 @SpringBootTest
-class CalendarApplicationTests {
+class schedulerApplicationTests {
 
     @Autowired
     private ScheduleService scheduleService;
