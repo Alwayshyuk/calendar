@@ -29,8 +29,9 @@ public class Schedule {
     private String content;
 
     //1:Red, 2:Blue, 3:Green 등으로 일정의 성격에 따른 색상 표현
-    @Column(name = "color")
-    private int color;
+    @ManyToOne
+    @JoinColumn(name = "color")
+    private Color color;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "scheduledate")
@@ -40,8 +41,9 @@ public class Schedule {
     @Column(name = "scheduletime")
     private int scheduletime;
 
-    //1:수행 전 일정, 2: 미뤄진 일정, 3: 수행 후 일정 등으로 일정 상태를 위해 int로 구현
-    @Column(name = "checked")
-    private int checked;
+    //1:수행 전 일정, 2: 미뤄진 일정, 3: 수행 후 일정 등으로 일정 상태
+    @ManyToOne
+    @JoinColumn(name="checked")
+    private Checked checked;
 
 }
