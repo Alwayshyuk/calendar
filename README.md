@@ -20,3 +20,9 @@
 3. src/test/java/me/sanghyuk/calendar/schedulerApplicationTests.java 테스트 코드 확인 및 실행
 
 ![erd](https://github.com/user-attachments/assets/7976b717-76f6-4a3d-8524-ee2105a0317d)
+
+
+# 주력 컴포넌트
+
+# API 명세
+http://localhost:8080/swagger-ui/index.html
