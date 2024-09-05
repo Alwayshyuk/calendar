@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -21,41 +20,49 @@ public class ScheduleService {
     }
 
     public Schedule modify(ScheduleDTO scheduleDTO) {
-        scheduleRepository.findById(scheduleDTO.getSno()).orElseThrow(() -> new IllegalStateException("Schedule not found"));
+        separator(scheduleDTO.getUserNo(), scheduleDTO.getSno());
         return scheduleRepository.save(scheduleDTO.toEntity());
     }
 
-    public void delete(ScheduleDTO scheduleDTO) {
-        scheduleRepository.findById(scheduleDTO.getSno()).orElseThrow(() -> new IllegalStateException("Schedule not found"));
-        scheduleRepository.delete(scheduleDTO.toEntity());
+    public void delete(Long userNo, Long sno) {
+        if (separator(userNo, sno)) {
+            scheduleRepository.deleteById(sno);
+        }
     }
 
     public Schedule findById(long sno) {
         return scheduleRepository.findById(sno).orElseThrow(() -> new IllegalStateException("Schedule not found"));
     }
 
-    public List<Schedule> findByUser(Long user) {
-        return scheduleRepository.findByUser(user);
+    public List<Schedule> findByUser(Long userNo) {
+        return scheduleRepository.findByUser(userNo);
     }
 
-    public List<Schedule> findByDate(Date date, Long user) {
-        return scheduleRepository.findByScheduledate(date, user);
+    public List<Schedule> findByDate(Date date, Long userNo) {
+        return scheduleRepository.findByScheduledate(date, userNo);
     }
 
-    public List<Schedule> findByPeriod(Date start, Date end, Long user) {
-        return scheduleRepository.findByPeriod(start,end,user);
+    public List<Schedule> findByPeriod(Date start, Date end, Long userNo) {
+        return scheduleRepository.findByPeriod(start, end, userNo);
     }
-    public Schedule shareSchcedule(Long sno, Long user){
+
+    public Schedule shareSchcedule(Long sno, Long userNo) {
         Schedule schedule = scheduleRepository.findById(sno).orElseThrow(() -> new IllegalStateException("Schedule not found"));
         ScheduleDTO scheduleDTO = entituToDTO(schedule);
-        scheduleDTO.setUser(user);
+        scheduleDTO.setUserNo(userNo);
         scheduleDTO.setSno(null);
         return scheduleRepository.save(scheduleDTO.toEntity());
     }
+
+    public boolean separator(Long userNo, Long sno) {
+        Schedule schedule = scheduleRepository.findById(sno).orElseThrow(() -> new IllegalStateException("Schedule not found"));
+        return schedule.getUserNo() == userNo;
+    }
+
     public ScheduleDTO entituToDTO(Schedule schedule) {
         ScheduleDTO scheduleDTO = ScheduleDTO.builder()
                 .sno(schedule.getSno())
-                .user(schedule.getUser())
+                .userNo(schedule.getUserNo())
                 .title(schedule.getTitle())
                 .content(schedule.getContent())
                 .checked(schedule.getChecked())
