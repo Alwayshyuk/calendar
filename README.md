@@ -13,12 +13,10 @@
  - mysql
 
 ### 빌드 및 실행 방법
-1. src/main/resources/application.properties 파일에 []를 자신의 mysql에 맞춰 작성.
-3. src/test/java/me/sanghyuk/calendar/schedulerApplicationTests.java 테스트 코드 확인 및 실행
+1. src/main/resources/application.properties 파일에 []를 자신의 mysql에 맞춰 작성
 2. src/main/java/me/sanghyuk/calendar/schedulerApplication.java 실행
    > 실행시 schedule 테이블 생성됨        
    > 생성 확인 후 mysql.sql의 더미 데이터 생성 쿼리문 mysql에서 실행
+3. src/test/java/me/sanghyuk/calendar/schedulerApplicationTests.java 테스트 코드 확인 및 실행
 
-### schedule 테이블
-
-|
+![erd](https://github.com/user-attachments/assets/7976b717-76f6-4a3d-8524-ee2105a0317d)
