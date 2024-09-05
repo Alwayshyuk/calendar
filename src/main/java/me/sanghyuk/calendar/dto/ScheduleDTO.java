@@ -27,7 +27,7 @@ public class ScheduleDTO {
     private String content;
 
     @Schema(description = "일정 색상")
-    private int color;
+    private int cno;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Schema(description = "일정 날짜")
@@ -37,7 +37,7 @@ public class ScheduleDTO {
     private int scheduletime;
 
     @Schema(description = "일정 상태")
-    private int checked;
+    private int chno;
 
     public Schedule toEntity() {
         return Schedule.builder()
@@ -45,8 +45,8 @@ public class ScheduleDTO {
                 .userNo(userNo)
                 .title(title)
                 .content(content)
-                .checked(checked)
-                .color(color)
+                .chno(chno)
+                .cno(cno)
                 .scheduledate(scheduledate)
                 .scheduletime(scheduletime)
                 .build();

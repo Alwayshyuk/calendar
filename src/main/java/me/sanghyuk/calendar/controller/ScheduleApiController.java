@@ -26,7 +26,7 @@ public class ScheduleApiController {
 
     private final ScheduleService scheduleService;
 
-    @Operation(summary = "일정 리스트 출력", description = "userNo를 클라이언트로 받아와 출력하는 API")
+    @Operation(summary = "모든 일정 조회", description = "userNo를 클라이언트로 받아와 출력하는 API")
     @GetMapping("/list")
     @Parameter(name = "userNo", description = "유저 번호", example = "1")
     public ResponseEntity list(@RequestParam(value = "userNo") Long userNo) {
@@ -37,12 +37,12 @@ public class ScheduleApiController {
     @PostMapping("/save")
     @Parameters({
             @Parameter(name = "userNo", description = "유저 번호", example = "1"),
-            @Parameter(name = "title", description = "일정 제목", example = "식사 약속"),
-            @Parameter(name = "content", description = "일정 내용", example = "회사 앞"),
-            @Parameter(name = "color", description = "약속 성격에 따른 색상", example = "1"),
+            @Parameter(name = "title", description = "일정 제목", example = "술"),
+            @Parameter(name = "content", description = "일정 내용", example = "동기"),
+            @Parameter(name = "cno", description = "1:red / 2:yellow / 3:green / 4:blue / 5:black", example = "1"),
             @Parameter(name = "scheduledate", description = "약속 일자", example = "2024-09-05"),
             @Parameter(name = "scheduletime", description = "약속 시간", example = "1800"),
-            @Parameter(name = "checked", description = "약속 상태", example = "1")
+            @Parameter(name = "chno", description = "1:실행 전 / 2:실행 후 / 3:변경", example = "1")
     })
     public ResponseEntity save(@RequestBody ScheduleDTO dto) {
         return ResponseEntity.ok(scheduleService.save(dto));
@@ -67,16 +67,32 @@ public class ScheduleApiController {
             @Parameter(name = "userNo", description = "유저 번호", example = "1"),
             @Parameter(name = "title", description = "일정 제목", example = "식사 약속"),
             @Parameter(name = "content", description = "일정 내용", example = "회사 앞"),
-            @Parameter(name = "color", description = "약속 성격에 따른 색상", example = "1"),
+            @Parameter(name = "cno", description = "1:red / 2:yellow / 3:green / 4:blue / 5:black", example = "1"),
             @Parameter(name = "scheduledate", description = "약속 일자", example = "2024-09-05"),
             @Parameter(name = "scheduletime", description = "약속 시간", example = "1800"),
-            @Parameter(name = "checked", description = "약속 상태", example = "1")
+            @Parameter(name = "chno", description = "1:실행 전 / 2:실행 후 / 3:변경", example = "1")
     })
     public ResponseEntity modify(@RequestBody ScheduleDTO dto) {
         return ResponseEntity.ok(scheduleService.modify(dto));
     }
 
-    @Operation(summary = "기간별 일정 조회", description = "기간을 정하여 일정을 조회하는 API")
+    @Operation(summary = "키워드 일정 검색", description = "키워드로 일정을 조회하는 API")
+    @GetMapping("/keywordList")
+    @Parameters({
+            @Parameter(name = "userNo", description = "유저 번호", example = "1"),
+            @Parameter(name = "keyword", description = "검색어", example = "동기"),
+            @Parameter(name = "type", description = "1:제목 / 2:내용 / 3:제목+내용", example = "1")
+    })
+    public ResponseEntity keywordList(
+            @RequestParam(value = "userNo") Long userNo,
+            @RequestParam(value = "keyword") String keyword,
+            @RequestParam(value = "type") int type
+    ) {
+        return ResponseEntity.ok(scheduleService.findByKeyword(userNo, keyword, type));
+
+    }
+
+    @Operation(summary = "기간별 일정 조회", description = "기간에 해당하는 일정을 조회하는 API")
     @GetMapping("/periodList")
     @Parameters({
             @Parameter(name = "userNo", description = "유저 번호", example = "1"),
@@ -88,7 +104,33 @@ public class ScheduleApiController {
             @RequestParam(value = "start") @DateTimeFormat(pattern = "yyyy-MM-dd") Date start,
             @RequestParam(value = "end") @DateTimeFormat(pattern = "yyyy-MM-dd") Date end
     ) {
-        return ResponseEntity.ok(scheduleService.findByPeriod(start, end, userNo));
+        return ResponseEntity.ok(scheduleService.findByPeriod(userNo, start, end));
+    }
+
+    @Operation(summary = "상태별 일정 조회", description = "일정 상태에 따라 일정을 조회하는 API")
+    @GetMapping("/checkedList")
+    @Parameters({
+            @Parameter(name = "userNo", description = "유저 번호", example = "1"),
+            @Parameter(name = "checkedName", description = "실행 전 / 실행 후 / 변경", example = "실행 전")
+    })
+    public ResponseEntity checkedList(
+            @RequestParam(value = "userNo") Long userNo,
+            @RequestParam(value = "checkedName") String checkedName
+    ) {
+        return ResponseEntity.ok(scheduleService.findByCheckedName(userNo, checkedName));
+    }
+
+    @Operation(summary = "성격별 일정 조회", description = "일정 성격(색상)에 따라 일정을 조회하는 API")
+    @GetMapping("/colorList")
+    @Parameters({
+            @Parameter(name = "userNo", description = "유저 번호", example = "1"),
+            @Parameter(name = "colorName", description = "red / yellow / green / blue / black", example = "red")
+    })
+    public ResponseEntity colorList(
+            @RequestParam(value = "userNo") Long userNo,
+            @RequestParam(value = "colorName") String colorName
+    ) {
+        return ResponseEntity.ok(scheduleService.findByColorName(userNo, colorName));
     }
 
     @Operation(summary = "일정 공유", description = "일정을 타 이용자에게 공유하는 API")
@@ -101,7 +143,7 @@ public class ScheduleApiController {
             @RequestParam(value = "userNo") Long userNo,
             @RequestParam(value = "sno") Long sno
     ) {
-        return ResponseEntity.ok(scheduleService.shareSchcedule(sno, userNo));
+        return ResponseEntity.ok(scheduleService.shareSchcedule(userNo, sno));
     }
 
 }

@@ -26,8 +26,8 @@ class schedulerApplicationTests {
                     .userNo(1L + i)
                     .title("title..." + i)
                     .content("content..." + i)
-                    .checked(1)
-                    .color(1)
+                    .chno(1)
+                    .cno(1)
                     .scheduledate(Date.valueOf("2022-02-03"))
                     .scheduletime(1600 + i)
                     .build();
@@ -43,8 +43,8 @@ class schedulerApplicationTests {
                 .userNo(1L)
                 .title("titleModify")
                 .content("contentModify")
-                .checked(1)
-                .color(1)
+                .chno(2)
+                .cno(2)
                 .scheduledate(Date.valueOf("2022-02-03"))
                 .scheduletime(1600)
                 .build();
@@ -67,16 +67,37 @@ class schedulerApplicationTests {
     @DisplayName("날짜별 스케줄 검색")
     @Test
     public void searchScheduleTest() {
-        System.out.println(scheduleService.findByDate(Date.valueOf("2022-02-01"), 1L));
+        System.out.println(scheduleService.findByDate(1L, Date.valueOf("2022-02-01")));
     }
 
     @DisplayName("스케줄 기간 검색")
     @Test
     public void searchPeriodTest() {
-        System.out.println(scheduleService.findByPeriod(Date.valueOf("2024-09-05"), Date.valueOf("2024-09-06"), 1L));
+        System.out.println(scheduleService.findByPeriod(1L, Date.valueOf("2024-09-05"), Date.valueOf("2024-09-06")));
     }
 
-    @DisplayName("타 사용자와 스캐줄 공유")
+    @DisplayName("특정 상태의 스케줄 검색")
+    @Test
+    public void searchCheckedNameTest() {
+        System.out.println(scheduleService.findByCheckedName(1L, "변경"));
+    }
+
+    @DisplayName("특정 성격의 일정 검색")
+    @Test
+    public void searchColorNameTest(){
+        System.out.println(scheduleService.findByColorName(1L, "red"));
+    }
+
+
+    @DisplayName("스케줄 1가지 키워드 검색")
+    @Test
+    public void searchKeywordTest() {
+        System.out.println(scheduleService.findByKeyword(1L, "저녁", 1));
+        System.out.println(scheduleService.findByKeyword(1L, "저녁", 2));
+        System.out.println(scheduleService.findByKeyword(1L, "저녁", 3));
+    }
+
+    @DisplayName("스케줄 생성 후 타 사용자와 스캐줄 공유")
     @Test
     public void shareTest() {
 
@@ -84,8 +105,8 @@ class schedulerApplicationTests {
                 .userNo(2L)
                 .title("ShareTitle!!!")
                 .content("ShareContent!!!")
-                .checked(1)
-                .color(1)
+                .chno(1)
+                .cno(1)
                 .scheduledate(Date.valueOf("2022-02-10"))
                 .scheduletime(1600)
                 .build();
@@ -94,6 +115,5 @@ class schedulerApplicationTests {
 
         scheduleService.shareSchcedule(sno, 104L);
     }
-
 
 }

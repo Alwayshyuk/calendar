@@ -15,8 +15,8 @@ public class Checked {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chno")
-    private Long chno;
+    private int chno;
 
-    @Column(name = "checkedName")
-    private String checkName;
+    @Column(name = "checkedName", nullable = false)
+    private String checkedName;
 }

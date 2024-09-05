@@ -30,23 +30,37 @@ public class ScheduleService {
         }
     }
 
-    public Schedule findById(long sno) {
-        return scheduleRepository.findById(sno).orElseThrow(() -> new IllegalStateException("Schedule not found"));
-    }
-
     public List<Schedule> findByUser(Long userNo) {
         return scheduleRepository.findByUser(userNo);
     }
 
-    public List<Schedule> findByDate(Date date, Long userNo) {
-        return scheduleRepository.findByScheduledate(date, userNo);
+    public List<Schedule> findByDate(Long userNo, Date date) {
+        return scheduleRepository.findByScheduledate(userNo, date);
     }
 
-    public List<Schedule> findByPeriod(Date start, Date end, Long userNo) {
-        return scheduleRepository.findByPeriod(start, end, userNo);
+    public List<Schedule> findByPeriod(Long userNo, Date start, Date end) {
+        return scheduleRepository.findByPeriod(userNo, start, end);
     }
 
-    public Schedule shareSchcedule(Long sno, Long userNo) {
+    public List<Schedule> findByKeyword(Long userNo, String keyword, int type) {
+        if (type == 1) {
+            return scheduleRepository.findByTitle(userNo, keyword);
+        } else if (type == 2) {
+            return scheduleRepository.findByContent(userNo, keyword);
+        } else {
+            return scheduleRepository.findByTitleAndContent(userNo, keyword);
+        }
+    }
+
+    public List<Schedule> findByCheckedName(Long userNo, String checkedName) {
+        return scheduleRepository.findByCheckedName(userNo, checkedName);
+    }
+
+    public List<Schedule> findByColorName(Long userNo, String colorName) {
+        return scheduleRepository.findByColorName(userNo, colorName);
+    }
+
+    public Schedule shareSchcedule(Long userNo, Long sno) {
         Schedule schedule = scheduleRepository.findById(sno).orElseThrow(() -> new IllegalStateException("Schedule not found"));
         ScheduleDTO scheduleDTO = entituToDTO(schedule);
         scheduleDTO.setUserNo(userNo);
@@ -65,8 +79,8 @@ public class ScheduleService {
                 .userNo(schedule.getUserNo())
                 .title(schedule.getTitle())
                 .content(schedule.getContent())
-                .checked(schedule.getChecked())
-                .color(schedule.getColor())
+                .chno(schedule.getChno())
+                .cno(schedule.getCno())
                 .scheduledate(schedule.getScheduledate())
                 .scheduletime(schedule.getScheduletime())
                 .build();

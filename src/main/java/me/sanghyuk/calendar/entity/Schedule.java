@@ -28,10 +28,8 @@ public class Schedule {
     @Column(name = "content", length = 300)
     private String content;
 
-    //1:Red, 2:Blue, 3:Green 등으로 일정의 성격에 따른 색상 표현
-    @ManyToOne
-    @JoinColumn(name = "color")
-    private Color color;
+    @Column(name = "cno", nullable = false)
+    private int cno;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "scheduledate")
@@ -41,9 +39,8 @@ public class Schedule {
     @Column(name = "scheduletime")
     private int scheduletime;
 
-    //1:수행 전 일정, 2: 미뤄진 일정, 3: 수행 후 일정 등으로 일정 상태
-    @ManyToOne
-    @JoinColumn(name="checked")
-    private Checked checked;
+    //1:수행 전 일정, 2: 수행 후 일정, 3: 미뤄진 일정 등으로 일정 상태
+    @Column(name="chno", nullable = false)
+    private int chno;
 
 }
