@@ -1,0 +1,10 @@
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (1, '1번 일정 제목', '1번 일정 내용', 1, '2024-09-05', '1800', 1);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (1, '2번 일정 제목', '2번 일정 내용', 2, '2024-09-06', '1800', 2);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (2, '3번 일정 제목', '3번 일정 내용', 3, '2024-09-07', '1800', 3);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (2, '4번 일정 제목', '4번 일정 내용', 4, '2024-09-08', '1800', 1);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (3, '5번 일정 제목', '5번 일정 내용', 5, '2024-09-09', '1800', 2);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (3, '6번 일정 제목', '6번 일정 내용', 1, '2024-09-10', '1800', 3);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (4, '7번 일정 제목', '7번 일정 내용', 2, '2024-09-11', '1800', 1);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (4, '8번 일정 제목', '8번 일정 내용', 3, '2024-09-12', '1800', 2);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (5, '9번 일정 제목', '9번 일정 내용', 4, '2024-09-13', '1800', 3);
+insert into schedule (user_no, title, content, color, scheduledate, scheduletime, checked) values (5, '10번 일정 제목', '10번 일정 내용', 5, '2024-09-14', '1800', 1);
