@@ -13,12 +13,20 @@
  - mysql
 
 ### 빌드 및 실행 방법
-1. src/main/resources/application.properties 파일에 []를 자신의 mysql에 맞춰 작성.
-3. src/test/java/me/sanghyuk/calendar/schedulerApplicationTests.java 테스트 코드 확인 및 실행
+1. src/main/resources/application.properties 파일에 []를 자신의 mysql에 맞춰 작성
 2. src/main/java/me/sanghyuk/calendar/schedulerApplication.java 실행
    > 실행시 schedule 테이블 생성됨        
    > 생성 확인 후 mysql.sql의 더미 데이터 생성 쿼리문 mysql에서 실행
+3. src/test/java/me/sanghyuk/calendar/schedulerApplicationTests.java 테스트 코드 확인 및 실행
 
-### schedule 테이블
+![erd](https://github.com/user-attachments/assets/7976b717-76f6-4a3d-8524-ee2105a0317d)
 
-|
+
+# 주력 컴포넌트
+@Service 컴포넌트를 가장 주력으로 사용했습니다.        
+API 특성상 비즈니스 로직이 가장 중요하고 많은 내용을 담고 있다고 생각되어 가장 주력으로 사용한 컴포넌트입니다.              
+@Service 컴포넌트의 메서드들의 기능 및 사용 이유는 모두 주석으로 기재해두었습니다.
+
+
+# API 명세
+http://localhost:8080/swagger-ui/index.html
