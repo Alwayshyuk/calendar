@@ -19,7 +19,7 @@
    > 생성 확인 후 mysql.sql의 더미 데이터 생성 쿼리문 mysql에서 실행
 3. src/test/java/me/sanghyuk/calendar/schedulerApplicationTests.java 테스트 코드 확인 및 실행
 
-![erd](https://github.com/user-attachments/assets/7976b717-76f6-4a3d-8524-ee2105a0317d)
+![erd](https://github.com/user-attachments/assets/411b465e-53fe-4425-bbac-6cd5e97ec8eb)
 
 
 # 주력 컴포넌트
