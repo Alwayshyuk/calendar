@@ -30,4 +30,4 @@ API 특성상 비즈니스 로직이 가장 중요하고 많은 내용을 담고
 
 
 # API 명세
-http://localhost:[IDE포트번호]/swagger-ui/index.html
+http://localhost:8080/swagger-ui/index.html
